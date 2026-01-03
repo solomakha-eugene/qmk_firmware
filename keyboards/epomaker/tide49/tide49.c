@@ -850,7 +850,7 @@ void housekeeping_task_user(void) {
          writePin(HS_LED_BOOSTING_PIN,0);
 #endif
          if(!val_value){
-            rgb_matrix_sethsv_noeeprom(start_hsv.h,start_hsv.s,150);
+            rgb_matrix_sethsv_noeeprom(start_hsv.h,start_hsv.s,start_hsv.v);
          }
          val_value = true;
         
