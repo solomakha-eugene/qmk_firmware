@@ -1251,8 +1251,8 @@ void hs_reset_settings(void) {
     eeconfig_update_rgb_matrix_default();
     eeconfig_read_keymap(&keymap_config);
    
-#if defined(NKRO_ENABLE) && defined(FORCE_NKRO)
-    keymap_config.nkro = 0;
+#if defined(NKRO_ENABLE) && defined(NKRO_DEFAULT_ON)
+    keymap_config.nkro = 1;
     eeconfig_update_keymap(&keymap_config);
 #endif
 
