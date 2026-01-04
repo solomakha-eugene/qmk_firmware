@@ -214,7 +214,6 @@
     "url": "https://www.jiebao.com",
     "usb": {
         "device_version": "0.2.0",
-        "force_nkro": true,
         "pid": "0xE47A",
         "suspend_wakeup_delay": 1000,
         "vid": "0x342D"
