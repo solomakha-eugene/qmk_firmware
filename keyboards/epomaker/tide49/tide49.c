@@ -1173,6 +1173,31 @@ bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
         return false;
     }
 
+    // FN layer indicators for connectivity and OS
+    if (layer_state_is(_FL) || layer_state_is(_MFL)) {
+        #ifdef WIRELESS_ENABLE
+        uint8_t devs = wireless_get_current_devs();
+        if (devs == DEVS_USB) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_USB, HS_LBACK_COLOR_USB);
+        } else if (devs == DEVS_BT1) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_BT1, HS_LBACK_COLOR_BT1);
+        } else if (devs == DEVS_BT2) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_BT2, HS_LBACK_COLOR_BT2);
+        } else if (devs == DEVS_BT3) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_BT3, HS_LBACK_COLOR_BT3);
+        } else if (devs == DEVS_2G4) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_2G4, HS_LBACK_COLOR_2G4);
+        }
+        #endif
+
+        if (!keymap_is_mac_system()) {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_WIN, RGB_WHITE);
+        } else {
+            rgb_matrix_set_color(HS_RGB_BLINK_INDEX_MAC, RGB_WHITE);
+
+        }
+    }
+
     if (rgb_matrix_indicators_advanced_user(led_min, led_max) != true) {
 
         return false;
@@ -1185,7 +1210,13 @@ bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
 
     if (use2_timer && timer_elapsed32(use2_timer) > 3000) {
         confinfo.use2_flag = !confinfo.use2_flag;
+        rgb_blink_dir();
         use2_timer = 0;
+    }
+
+    // Set L_Ctrl to white in function mode
+    if (get_highest_layer(default_layer_state) == _FBL || get_highest_layer(default_layer_state) == _FFL) {
+        rgb_matrix_set_color(0, RGB_WHITE);
     }
 
     if (((*md_getp_state() == MD_STATE_CONNECTED) || USB_DRIVER.state == USB_ACTIVE) && confinfo.use1_flag == true)
