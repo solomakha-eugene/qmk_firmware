@@ -611,9 +611,13 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (rgb_matrix_get_val() <= RGB_MATRIX_VAL_STEP) {
                     rgb_blink_dir();
-                    for(uint8_t i = 0; i < RGB_MATRIX_LED_COUNT - RGBLED_NUM;i++){
-                        rgb_matrix_set_color(i,0,0,0);
-                    }
+#    ifdef RGBLIGHT_ENABLE
+                    for (uint8_t i = 0; i < (RGB_MATRIX_LED_COUNT - RGBLED_NUM); i++) {
+                        rgb_matrix_set_color(i, 0, 0, 0);
+                     }
+#    else
+                    rgb_matrix_set_color_all(0x00, 0x00, 0x00);
+#    endif
                     start_hsv.v = 0;
                 }
                 else{
