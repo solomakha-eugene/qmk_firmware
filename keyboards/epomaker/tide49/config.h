@@ -64,10 +64,6 @@
 #define UART_RX_PAL_MODE 7
 #define UART_TX_PAL_MODE 7
 
-/* Encoder */
-#define ENCODER_MAP_KEY_DELAY               1
-#define ENCODER_RESOLUTION                  2
-
 /* SPI */
 #define SPI_DRIVER                          SPIDQ
 #define SPI_SCK_PIN                         B3
@@ -82,15 +78,6 @@
 #define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
-
-/* RGB Light */
-#define RGBLED_NUM 8
-#define RGBLIGHT_CUSTOM_DRIVER
-#define RGBLIGHT_DISABLE_KEYCODES
-#define BREATHING_VAL           40
-#define RAINBOW_MOOD            40
-#define LED_TYPE                RGB
-#define RGBLIGHT_LED_MAP {0, 1, 2, 3, 4, 5, 6, 7}
 
 /* WS2812 */
 #define WS2812_SPI_DRIVER       SPIDM2
