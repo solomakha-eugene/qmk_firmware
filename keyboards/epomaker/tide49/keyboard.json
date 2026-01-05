@@ -1,12 +1,12 @@
 {
     "manufacturer": "EPOMAKER",
     "keyboard_name": "Tide49",
-    "maintainer": "EPOMAKER",
+    "maintainer": "iSolo",
     "bootloader": "wb32-dfu",
     "bootmagic": {
         "matrix": [0, 0]
     },
-    "debounce": 1,
+    "debounce": 7,
     "diode_direction": "ROW2COL",
     "eeprom": {
         "driver": "wear_leveling",
