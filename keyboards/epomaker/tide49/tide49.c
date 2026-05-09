@@ -157,11 +157,11 @@ void keyboard_post_init_kb(void) {
 #endif
 
 #ifdef MM_BT_DEF_PIN
-    setPinInputHigh(MM_BT_DEF_PIN);
+    gpio_set_pin_input_high(MM_BT_DEF_PIN);
 #endif
 
 #ifdef MM_2G4_DEF_PIN
-    setPinInputHigh(MM_2G4_DEF_PIN);
+    gpio_set_pin_input_high(MM_2G4_DEF_PIN);
 #endif
 
 #endif
@@ -172,11 +172,11 @@ void keyboard_post_init_kb(void) {
 #endif
 
 #ifdef HS_BAT_CABLE_PIN
-    setPinInput(HS_BAT_CABLE_PIN);
+    gpio_set_pin_input(HS_BAT_CABLE_PIN);
 #endif
 
 #ifdef BAT_FULL_PIN
-    setPinInputHigh(BAT_FULL_PIN);
+    gpio_set_pin_input_high(BAT_FULL_PIN);
 #endif
 
 #ifdef WIRELESS_ENABLE
@@ -825,9 +825,9 @@ void housekeeping_task_user(void) {
     static uint32_t hs_current_time;
     static bool val_value = false;
 
-    charging_state = readPin(HS_BAT_CABLE_PIN);
+    charging_state = gpio_read_pin(HS_BAT_CABLE_PIN);
 
-    bat_full_flag = readPin(BAT_FULL_PIN);
+    bat_full_flag = gpio_read_pin(BAT_FULL_PIN);
 
     
     if (charging_state && (bat_full_flag)) { 
@@ -847,7 +847,7 @@ void housekeeping_task_user(void) {
     
     if (charging_state){
 #ifdef HS_LED_BOOSTING_PIN
-         writePin(HS_LED_BOOSTING_PIN,0);
+         gpio_write_pin(HS_LED_BOOSTING_PIN,0);
 #endif
          if(!val_value){
             rgb_matrix_sethsv_noeeprom(start_hsv.h,start_hsv.s,150);
@@ -857,7 +857,7 @@ void housekeeping_task_user(void) {
     }
     else{
 #ifdef HS_LED_BOOSTING_PIN
-        writePin(HS_LED_BOOSTING_PIN,1);
+        gpio_write_pin(HS_LED_BOOSTING_PIN,1);
 #endif
         if(val_value){
             rgb_matrix_sethsv(start_hsv.h,start_hsv.s,start_hsv.v);
@@ -1267,5 +1267,4 @@ void hs_reset_settings(void) {
     hs_rgb_blink_set_timer(timer_read32());
     keyboard_post_init_kb();
 }
-
 
